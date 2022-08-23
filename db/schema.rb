@@ -95,10 +95,10 @@ ActiveRecord::Schema.define(version: 2022_08_16_084715) do
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "user_name", null: false
-    t.date "user_birthday", null: false
+    t.string "name", null: false
+    t.date "birthday", null: false
     t.string "gender", null: false
-    t.integer "target_weight", null: false
+    t.float "target_weight"
     t.date "target_date"
     t.boolean "is_active", default: true, null: false
     t.string "reset_password_token"

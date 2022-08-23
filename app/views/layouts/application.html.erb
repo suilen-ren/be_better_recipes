@@ -11,6 +11,31 @@
   </head>
 
   <body>
+    ログイン中ユーザー:
+    <% if user_signed_in? %>
+      <%= current_user.name %>
+    <% elsif admin_signed_in? %>
+      <span>管理者</span>
+    <% end %>
+    <h3></h3>
+    <ul>
+      <li>未ログイン用ヘッダ</li>
+      <li>アバウト</li>
+      <li><%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post %></li>
+      <li><%= link_to 'ログイン',user_session_path %></li>
+      <li><%= link_to '新規登録',new_user_registration_path %></li>
+    </ul>
+    <ul>
+      <li>ログイン時ヘッダ</li>
+      <li><%= link_to 'マイページ', mypages_path %></li>
+      <li><%= link_to 'レシピ一覧', recipes_path %></li>
+      <li><%= link_to 'tips', tips_about_diet_url %></li>
+      <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+    </ul>
+
+
+    <%= flash[:notice] %>
+    <%= flash[:alert] %>
     <%= yield %>
   </body>
 </html>
