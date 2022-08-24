@@ -6,6 +6,7 @@ class User::RecipesController < ApplicationController
   end
 
   def new
+    @recipe = Recipe.new
   end
 
   def edit

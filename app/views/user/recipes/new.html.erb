@@ -1,2 +1,9 @@
-<h1>User::Recipes#new</h1>
-<p>Find me in app/views/user/recipes/new.html.erb</p>
+<h2>レシピ新規投稿</h2>
+
+<%= form_with model: @recipe , url: "/recipes" do |f| %>
+
+  <label>レシピ名</label>
+  <%= f.text_field :title %>
+  
+  <label>ジャンル</label>
+  
