@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 2022_08_24_081030) do
     t.integer "user_id", null: false
     t.integer "genre_id", null: false
     t.text "title", null: false
-    t.text "preparation", null: false
+    t.text "feature", null: false
     t.text "making", null: false
     t.boolean "permit_user", default: true, null: false
     t.boolean "permit_admin", default: true, null: false
