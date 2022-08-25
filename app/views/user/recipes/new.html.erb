@@ -1,6 +1,6 @@
 <h2>レシピ新規投稿</h2>
 
-<%= form_with model: @recipe , url: "/recipes" do |f| %>
+<%= form_with model: @recipe , url: "/recipes" ,local: true  do |f| %>
 
   <label>レシピ名</label><br />
   <%= f.text_field :title %><br />

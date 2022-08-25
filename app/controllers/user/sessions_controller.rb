@@ -5,7 +5,7 @@ class User::SessionsController < Devise::SessionsController
     if user_signed_in?
       flash[:alert] = "すでにログインしています"
       redirect_to root_path
-    elsif
+    else
       user= User.find_or_create_by!(email: 'guest@example.com') do |user|
         user.password = SecureRandom.urlsafe_base64
         user.name = "ゲスト"
