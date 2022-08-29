@@ -1,8 +1,12 @@
 class User::RecipesController < ApplicationController
+  before_action :authenticate_user!
+
   def index
+    @recipes = Recipe.all
   end
 
   def show
+    @recipe = Recipe.find(params[:id])
   end
 
   def new
@@ -10,6 +14,7 @@ class User::RecipesController < ApplicationController
   end
 
   def edit
+    @recipe = Recipe.find(params[:id])
   end
 
   def update
@@ -32,6 +37,6 @@ class User::RecipesController < ApplicationController
 
   private
   def recipe_params
-    params.require(:recipe).permit(:title,:feature,:making,:permit_user)
+    params.require(:recipe).permit(:title,:feature,:making,:permit_user,:image)
   end
 end

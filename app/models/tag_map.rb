@@ -1,5 +1,5 @@
 class TagMap < ApplicationRecord
-  belongs_to :tag_map
+  belongs_to :tag
   belongs_to :recipe
 
   validates :recipe_id, presence: true

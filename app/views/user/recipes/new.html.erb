@@ -5,6 +5,9 @@
   <label>レシピ名</label><br />
   <%= f.text_field :title %><br />
 
+  <label>料理完成イメージ</label><br />
+  <%= f.file_field :image, accept: "image/*"%>
+
   <label>タグ(複数タグを作る場合は)</label><br />
   <%= f.text_field :tag_name %><br />
 

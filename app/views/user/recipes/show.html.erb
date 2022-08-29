@@ -1,2 +1,24 @@
-<h1>User::Recipes#show</h1>
-<p>Find me in app/views/user/recipes/show.html.erb</p>
+<div class ="container">
+  <div class ="row">
+    <div class = "card col-10 offset-2 shadow-sm py-3 my-3">
+      <h4 class ="card-header bg-warning">
+        <%= @recipe.title %>
+      </h4>
+      <%= image_tag @recipe.get_image, class: "card_img_top w-50 mx-auto" %>
+      <h3 class ="card-header">この料理の特徴</h3>
+      <p class ="card-body">
+        <%= @recipe.feature %>
+      </p>
+      <h3 class ="card-header">作り方</h3>
+      <p class ="card-body">
+        <%= @recipe.making %>
+      </p>
+      <% if @recipe.user_id == current_user.id %>
+        <%= link_to "編集する", edit_recipe_path(@recipe.id), class: "btn btn-primary mr-5 ml-auto" %>
+      <% end %>
+    </div>
+    <h4><strong>コメント</strong></h4>
+
+
+  </div>
+</div>
