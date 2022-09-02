@@ -30,4 +30,14 @@ class Recipe < ApplicationRecord
     end
   end
 
+
+  def self.viewable
+    p_user = Recipe.where(permit_user: true)
+    return p_user.where(permit_admin: true)
+  end
+  
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
+  end
+
 end

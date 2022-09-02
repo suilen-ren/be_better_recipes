@@ -1,8 +1,9 @@
 <div class ="container p-5">
-  <div class ="row">
-    <div class ="card col-12">
-      <h2 class ="card-header">レシピ編集</h2>
-      <%= form_with model: @recipe , url: "/recipes" ,local: true  do |f| %>
+  <%= form_with model: @recipe , url: "/recipes/#{@recipe.id}",method: :patch ,local: true  do |f| %>
+    <div class ="row">
+
+      <div class ="card col-12">
+        <h2 class ="card-header mb-5">レシピ編集</h2>
         <div class ="form-group row">
           <label class ="col-2">レシピ名</label>
           <%= f.text_field :title ,class: "form-control col-10"%><br />
@@ -15,7 +16,7 @@
 
         <div class ="form-group">
           <label>タグ(複数タグを作る場合は","で区切ってください。)</label><br />
-          <%= f.text_field :tag_name ,class: "form-control col-10 offset-2"%><br />
+          <%= f.text_field :tag_name,value: @tag_list,class: "form-control col-10 offset-2"%><br />
         </div>
 
         <div class ="form-group row">
@@ -28,18 +29,19 @@
           <%= f.text_area :making ,rows: 10,class: "form-control col-10 "%><br />
         </div>
 
-        <div class ="row"></div>
+        <div class ="form-group row">
           <label class ="col-2">公開設定</label>
           <div class ="col-9">
             <%= f.radio_button :permit_user, true ,class: "form-check-input" %> <span class ="form-check-label">公開する</span></br>
             <%= f.radio_button :permit_user, false ,class: "form-check-input" %> <span class ="form-check-label">公開しない(下書き)</span><br />
           </div>
         </div>
-        <%= f.submit "レシピを保存する" ,class: "btn btn-success mx-auto"%>
-      <% end %>
+        <%= f.submit "レシピを保存する" ,class: "btn btn-success mx-auto my-5"%>
 
+      </div>
     </div>
-  </div>
+  <% end %>
+  <%= link_to "レシピを削除する", "/recipes/#{@recipe.id}" ,method: :delete ,data: { confirm: "本当に削除しますか？一度消したレシピは復元できません"}%>
 </div>
 
 

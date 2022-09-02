@@ -13,8 +13,19 @@
       <p class ="card-body">
         <%= @recipe.making %>
       </p>
+      <h3 class ="card-header">タグ一覧</h3>
+      <p class ="card-body">
+        <% @recipe_tags.each do |tag| %>
+          <%= link_to tag.name, tag_path(tag.id) %>
+        <% end %>
+      </p>
+      <% if @recipe.favorited_by?(current_user) %>
+        <%= link_to 'お気に入り登録済' ,recipe_favorites_path(@recipe.id), method: :delete, class: "btn btn-secondary" %>
+      <% else %>
+        <%= link_to 'お気に入り登録する', recipe_favorites_path(@recipe.id), method: :post ,class: "btn btn-primary" %>
+      <% end %>
       <% if @recipe.user_id == current_user.id %>
-        <%= link_to "編集する", edit_recipe_path(@recipe.id), class: "btn btn-primary mr-5 ml-auto" %>
+        <%= link_to "編集する", edit_recipe_path(@recipe), class: "btn btn-primary mr-5 ml-auto" %>
       <% end %>
     </div>
     <h4><strong>コメント</strong></h4>

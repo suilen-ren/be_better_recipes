@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-    devise_for :admins, skip: [:passwords, :registrations], controllers: {
+  devise_for :admins, skip: [:passwords, :registrations], controllers: {
     sessions: "admin/sessions"
   }
   devise_for :users, skip: [:passwords],controllers: {
@@ -12,10 +12,14 @@ Rails.application.routes.draw do
   end
 
   scope module: :user do
+    get 'search', to: "recipes#search"
     root to: 'homes#top'
+
+    resources :tags ,only: [:show]
+
     get 'about' ,to: 'homes#about'
     resources :recipes do
-      resources :favorite , only: [:create,:destroy]
+      resource :favorites, only: [:create,:destroy]
     end
     resource :mypages ,except: [:new, :destroy, :create] do
       get 'recipes', to: 'mypages#recipes'

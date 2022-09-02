@@ -32,6 +32,14 @@
       <li><%= link_to 'tips', tips_about_diet_url %></li>
       <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
     </ul>
+    <div class ="search-form">
+      <%= search_form_for @q, url: search_path do |f| %>
+        <%= f.label 'レシピを検索' %>
+        <%= f.search_field :title_or_feature_cont %>
+        <br>
+        <%= f.submit "検索" %>
+      <% end %>
+    </div>
 
 
     <%= flash[:notice] %>
