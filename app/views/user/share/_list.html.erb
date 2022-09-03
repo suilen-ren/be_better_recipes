@@ -1,31 +1,10 @@
-<div class ="container">
-  <div class ="row">
-    <div class ="col-12">
-      <h2><%= title %></h2>
-      <%= link_to "新しくレシピを作成する", new_recipe_path, class: "btn btn-primary" %>
-      <table class = "table">
-        <thead>
-          <tr>
-            <th>画像</th>
-            <th>料理名</th>
-            <th>投稿者</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @recipes.each do |recipe|%>
-            <tr>
-              <td>
-                <%= link_to recipe_path(recipe.id) do %>
-                  <%= image_tag recipe.get_image, size: "100x100" %>
-                <% end %>
-              </td>
-              <td><%= recipe.title %></td>
-              <td><%= recipe.user.name %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-      <%= paginate @recipes %>
+<div class ="row">
+  <% recipes.each do |recipe| %>
+    <div class ="col-3 p-1">
+      <%= link_to recipe_path(recipe.id) ,class: "card shadow-sm my-1" do %>
+        <%= image_tag recipe.get_image, class: "card-img-top" %>
+        <span class= "card-body"><%= recipe.title %></span>
+      <% end %>
     </div>
-  </div>
+  <% end %>
 </div>

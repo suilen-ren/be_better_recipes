@@ -1,2 +1,10 @@
-<h1>User::Mypages#recipes</h1>
-<p>Find me in app/views/user/mypages/recipes.html.erb</p>
+<div class ="container">
+  <div class ="row">
+    <div class ="col-10 offset-2">
+      <h4 class ="header">投稿したレシピ</h4>
+      <%= render 'user/share/list', recipes: @recipes%>
+      <%= paginate @recipes %>
+    </div>
+  </div>
+</div>
+

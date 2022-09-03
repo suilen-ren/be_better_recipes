@@ -8,6 +8,9 @@ class User::RecipesController < ApplicationController
   def show
     @recipe = Recipe.find(params[:id])
     @recipe_tags = @recipe.tags
+    @comment = Comment.new
+    @comments = @recipe.comments.all
+
   end
 
   def new
@@ -53,7 +56,7 @@ class User::RecipesController < ApplicationController
   def search
     @recipes = @q.result.page(params[:pages]).per(10)
   end
-  
+
 
   private
   def recipe_params

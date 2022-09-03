@@ -1,2 +1,19 @@
-<h1>User::Mypages#show</h1>
-<p>Find me in app/views/user/mypages/show.html.erb</p>
+<div class ="container">
+  <div class ="row">
+    <div class ="col-10 offset-2">
+      <h4 class = "header">お気に入りレシピ</h4>
+      <%= render "user/share/list",recipes: @fav_recipes%>
+      <div class ="text-right">
+        <%= link_to ">>さらに表示",favorite_mypages_path %>
+      </div>
+      <h4 class ="header">自分が投稿したレシピ</h4>
+      <div class="text-right">
+        <%= link_to "レシピを投稿する",new_recipe_path, class: "btn btn-primary" %>
+      </div>
+      <%= render "user/share/list",recipes: @my_recipes%>
+      <div class ="text-right">
+        <%= link_to ">>さらに表示",recipes_mypages_path %>
+      </div>
+    </div>
+  </div>
+</div>

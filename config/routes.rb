@@ -20,13 +20,14 @@ Rails.application.routes.draw do
     get 'about' ,to: 'homes#about'
     resources :recipes do
       resource :favorites, only: [:create,:destroy]
+      resources :comments, only: [:create,:destroy]
     end
     resource :mypages ,except: [:new, :destroy, :create] do
       get 'recipes', to: 'mypages#recipes'
       get 'confirm', to: 'mypages#confirm'
       patch 'withdraw', to: 'mypages#withdraw'
       resource :goal ,only: [:show ,:create, :update]
-      get 'favorite', to: "favorite#index"
+      get 'favorite', to: "mypages#favorite"
     end
     get 'tips/about_diet', to: 'tips#about_diet'
   end

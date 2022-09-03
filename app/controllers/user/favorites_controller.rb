@@ -13,6 +13,5 @@ class User::FavoritesController < ApplicationController
     redirect_to recipe_path(recipe)
   end
 
-  def index
-  end
+
 end
