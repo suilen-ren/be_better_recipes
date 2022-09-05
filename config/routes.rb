@@ -22,7 +22,7 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create,:destroy]
       resources :comments, only: [:create,:destroy]
     end
-    resource :mypages ,except: [:new, :destroy, :create] do
+    resource :mypages ,except: [:new, :destroy] do
       get 'recipes', to: 'mypages#recipes'
       get 'confirm', to: 'mypages#confirm'
       patch 'withdraw', to: 'mypages#withdraw'

@@ -3,17 +3,33 @@
     <div class ="col-10 offset-2">
       <h4 class = "header">お気に入りレシピ</h4>
       <%= render "user/share/list",recipes: @fav_recipes%>
-      <div class ="text-right">
+      <% if @fav_recipes.count > 4 %>
         <%= link_to ">>さらに表示",favorite_mypages_path %>
-      </div>
-      <h4 class ="header">自分が投稿したレシピ</h4>
-      <div class="text-right">
-        <%= link_to "レシピを投稿する",new_recipe_path, class: "btn btn-primary" %>
-      </div>
+      <% elsif @fav_recipes.count == 0 %>
+        <p class ="ml-3">お気に入りレシピがありません</p>
+      <% end %>
+
+      <h4 class ="header d-inline">自分が投稿したレシピ</h4>
+      <%= link_to "レシピを投稿する",new_recipe_path, class: "btn btn-primary d-inline ml-5" %>
       <%= render "user/share/list",recipes: @my_recipes%>
-      <div class ="text-right">
-        <%= link_to ">>さらに表示",recipes_mypages_path %>
+      <% if @my_recipes.count > 4 %>
+        <div class ="text-right">
+          <%= link_to ">>さらに表示",recipes_mypages_path %>
+        </div>
+      <% elsif @fav_recipes.count == 0 %>
+        <p class ="ml-3">投稿したレシピがありません</p>
+      <% end %>
+
+      
+      <h4 class ="header d-inline">体重の遷移</h4>
+      <div class ="form-group ml-3">
+        <%= form_with model: @bodyweight, url: mypages_path ,local: true do |f| %>
+          <%= f.text_field :weight , class: "form-control w-25"%>
+          <%= f.submit "保存する"%>
+        <% end %>
       </div>
+
+      <%= line_chart @bodyweights.group_by_day(:created_at).count %>
     </div>
   </div>
 </div>
