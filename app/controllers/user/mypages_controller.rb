@@ -1,4 +1,5 @@
 class User::MypagesController < ApplicationController
+  before_action :authenticate_user!
   def show
     favorites = Favorite.where(user_id: current_user.id).pluck(:recipe_id)
     @fav_recipes = Recipe.viewable.where(id: favorites).limit(4)
@@ -6,20 +7,18 @@ class User::MypagesController < ApplicationController
     @bodyweights = current_user.bodyweights.all
     @bodyweight = Bodyweight.all
   end
-  
+
   def create
     @bodyweight = Bodyweight.new(bodyweight_params)
     @bodyweight.user_id = current_user.id
-    if current_user.bodyweights.last.created_at.to_date == Date.today
-      flash[:alert] = "体重は一日に一度保存できます"
-      redirect_to my_pages_path
+    if current_user.bodyweights.exists?(created_at: Time.zone.now.all_day)
+      flash[:alert] = "今日の体重はすでに登録されています"
+      redirect_to mypages_path
     else
-      if @bodyweight.save
-        flash[:notice] = "今日の体重を保存しました"
-        redirect_to my_pages_
-      else
-        flash
-      
+      @bodyweight.save
+      flash[:notice] = "今日の体重を保存しました"
+      redirect_to mypages_path
+    end
   end
 
   def edit
@@ -35,6 +34,9 @@ class User::MypagesController < ApplicationController
   def update
   end
 
+  def goal
+  end
+
   def withdraw
   end
 
@@ -42,9 +44,9 @@ class User::MypagesController < ApplicationController
     favorites = Favorite.where(user_id: current_user.id).pluck(:recipe_id)
     @recipes = Recipe.viewable.where(id: favorites).page(params[:pages]).per(12)
   end
-  
+
   private
-  
+
   def bodyweight_params
     params.require(:bodyweight).permit(:weight)
   end

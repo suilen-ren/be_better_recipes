@@ -20,16 +20,43 @@
         <p class ="ml-3">投稿したレシピがありません</p>
       <% end %>
 
-      
+
       <h4 class ="header d-inline">体重の遷移</h4>
-      <div class ="form-group ml-3">
+      <%= link_to "目標を設定、記録する" , mypages_goals_path ,class: "btn btn-primary d-inline"%>
+      <div class ="form-group ml-3 ml-auto my-2">
         <%= form_with model: @bodyweight, url: mypages_path ,local: true do |f| %>
-          <%= f.text_field :weight , class: "form-control w-25"%>
-          <%= f.submit "保存する"%>
+          <%= f.text_field :weight , class: "form-control w-25 d-inline"%>
+          <%= f.submit "保存する" ,class: "d-inline btn btn-secondary"%>
         <% end %>
       </div>
 
-      <%= line_chart @bodyweights.group_by_day(:created_at).count %>
+      <%= line_chart @bodyweights.group_by_day(:created_at).sum(:weight), curve: false, empty: "体重を記録していません。日々の変化の記録をつけていきましょう。" %>
+      <div class = "text-center" >
+        <% if current_user.target_weight.present? && current_user.bodyweights.exists? %>
+
+          <h5><strong>目標まであと<%= current_user.balance %>キロ</strong></h5>
+          <h4></h4>
+        <% else %>
+          <% if current_user.target_weight.present? %>
+            <p><mark>体重を記録していません。日々の変化の記録を残しましょう。</mark></p>
+          <% end %>
+          <% if current_user.bodyweights.exists? %>
+            <p><mark>目標が設定されていません。<%= link_to "こちら", mypages_goals_path %>より目標を設定しましょう</mark></p>
+          <% end %>
+
+
+        <% end %>
+        <p>どのような食事をとればいいのかわからない方へ</p>
+        <p><%= link_to "TIPS", tips_about_diet_path %>で栄養バランスに関する知識が学べます</p>
+      </div>
+
+      <h4 class ="header">会員情報の編集</h4>
+      <div class ="text-right ">
+        <%= link_to "編集する", edit_mypages_path , class: "btn btn-primary" %>
+      </div>
+
+
+      </div>
     </div>
   </div>
 </div>

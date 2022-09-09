@@ -26,7 +26,7 @@ Rails.application.routes.draw do
       get 'recipes', to: 'mypages#recipes'
       get 'confirm', to: 'mypages#confirm'
       patch 'withdraw', to: 'mypages#withdraw'
-      resource :goal ,only: [:show ,:create, :update]
+      resource :goals ,only: [:show , :update]
       get 'favorite', to: "mypages#favorite"
     end
     get 'tips/about_diet', to: 'tips#about_diet'
