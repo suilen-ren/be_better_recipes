@@ -1,2 +1,69 @@
-<h1>User::Mypages#edit</h1>
-<p>Find me in app/views/user/mypages/edit.html.erb</p>
+<div class ="container">
+  <div class ="row">
+    <div class ="card col-12 pb-5 m-5">
+      <h4 class ="card-header">会員情報編集</h4>
+      <%= form_with model: @user ,url: mypages_path,local: true do |f| %>
+        <table class ="table table-borderless col-10 offset-1 my-5" >
+          <tr>
+            <td>メールアドレス</td>
+            <td>
+              <div class ="form-group">
+                <%= f.text_field :email ,class: "form-control" %>
+              </div></td>
+          </tr>
+          <tr>
+            <td>表示名</td>
+            <td>
+              <div class ="form-group">
+                <%= f.text_field :name ,class: "form-control w-50" %>
+              </div></td>
+          </tr>
+          <tr>
+            <td>生年月日</td>
+            <td>
+              <div class ="form-group">
+                <%= f.date_field :birthday ,use_month_numbers: true ,class: "form-control w-50" %>
+              </div></td>
+          </tr>
+          <tr>
+            <td>性別</td>
+            <td>
+              <div class ="form-check form-check-inline">
+                <%= f.radio_button :gender ,"male", class: "form-check-input",checked: "checked" %> <%= f.label :gender, "男性" ,class: "form-check-label"%>
+              </div>
+              <div class ="form-check form-check-inline">
+                <%= f.radio_button :gender ,"female", class: "form-check-input" %> <%= f.label :gender, "女性",class: "form-check-label"%>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <div class ="text-center">
+          <%= f.submit "変更を保存", class: "btn btn-success" %>
+
+          <%= link_to "退会する", confirm_mypages_path, class: "btn btn-danger mx-5" %>
+        </div>
+      <% end %>
+
+      <h4 class ="card-header my-3">記録した体重を訂正する</h4>
+      <div class ="col-10 offset-1">
+
+        <p class ="card-body">過去4日ぶんの体重を訂正できます。</p>
+        <% @bodyweights.each do |bodyweight| %>
+          <div class ="card col-3">
+            <p class ="card-header"><%= bodyweight.created_at.strftime("%m/%d") %></p>
+            <%= form_with model: bodyweight,url: mypages_bodyweight_path(bodyweight.id),local: true do |f| %>
+              <div class ="card-body">
+                <div class ="form-inline text-center">
+                  <%= f.text_field :weight ,class: "form-control w-75" %><%= f.label "kg" %>
+                </div>
+                <div class ="text-center">
+                  <%= f.submit "変更" ,class: "btn btn-success m-2"%>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

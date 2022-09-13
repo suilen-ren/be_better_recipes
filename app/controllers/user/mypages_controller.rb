@@ -22,6 +22,8 @@ class User::MypagesController < ApplicationController
   end
 
   def edit
+    @user = current_user
+    @bodyweights = current_user.bodyweights.limit(4).order('id DESC')
   end
 
   def recipes
@@ -32,6 +34,10 @@ class User::MypagesController < ApplicationController
   end
 
   def update
+    @user = current_user
+    @user.update(user_params)
+    flash[:notice] = "登録情報を保存しました"
+    redirect_to mypages_path
   end
 
   def goal
@@ -46,6 +52,9 @@ class User::MypagesController < ApplicationController
   end
 
   private
+  def user_params
+    params.require(:user).permit(:email,:name,:birthday,:gender)
+  end
 
   def bodyweight_params
     params.require(:bodyweight).permit(:weight)

@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       patch 'withdraw', to: 'mypages#withdraw'
       resource :goals ,only: [:show , :update]
       get 'favorite', to: "mypages#favorite"
+      resources :bodyweights ,only: [:update]
     end
     get 'tips/about_diet', to: 'tips#about_diet'
   end

@@ -34,7 +34,11 @@
       <div class = "text-center" >
         <% if current_user.target_weight.present? && current_user.bodyweights.exists? %>
 
+          <% if current_user.balance == 0 %>
+            <h5>目標達成！</h5>
+          <% else %>
           <h5><strong>目標まであと<%= current_user.balance %>キロ</strong></h5>
+          <% end %>
           <h4></h4>
         <% else %>
           <% if current_user.target_weight.present? %>

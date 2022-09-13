@@ -5,6 +5,13 @@ class Recipe < ApplicationRecord
   has_many :tag_maps, dependent: :destroy
   has_many :tags, through: :tag_maps
   has_one_attached :image
+  
+  validates :user_id, presence: true
+  validates :title,presence: true,length: {maximum: 20}
+  validates :feature ,presence: true,length: {maximum: 300}
+  validates :making ,presence: true,length: {maximum: 1000}
+  validates :permit_user ,inclusion: {in: [true,false]}
+  validates :permit_admin ,inclusion: {in: [true,false]}
 
   def get_image
     unless image.attached?
