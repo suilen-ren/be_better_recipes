@@ -1,2 +1,38 @@
-<h1>Admin::Users#index</h1>
-<p>Find me in app/views/admin/users/index.html.erb</p>
+<div class ="container p-5">
+  <div class ="row">
+    <div class ="card col-12">
+      <h4 class ="card-header">ユーザー一覧</h4>
+      <table class ="table my-3">
+        <thead>
+          <tr>
+            <th>ユーザーID</th>
+            <th>ユーザー名</th>
+            <th colspan ="3">登録日</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= user.id %></td>
+              <td><%= user.name %></td>
+              <td><%= user.created_at.strftime("%Y/%m/%d") %></td>
+              <td>
+                <% if user.is_active == true %>
+                  <p class ="text-success">会員</p>
+                <% else %>
+                  <p class ="text-secondary">退会済</p>
+                <% end %>
+              </td>
+              <td><%= link_to "詳細を見る", admin_user_path(user.id) ,class: "btn btn-secondary"%></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <div class ="mx-auto">
+        <%= paginate @users %>
+      </div>
+
+    </div>
+  </div>
+</div>

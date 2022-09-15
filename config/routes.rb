@@ -1,14 +1,20 @@
 Rails.application.routes.draw do
 
-  devise_for :admins, skip: [:passwords, :registrations], controllers: {
+  devise_for :admin, skip: [:passwords, :registrations], controllers: {
     sessions: "admin/sessions"
   }
-  devise_for :users, skip: [:passwords],controllers: {
+  devise_for :user, skip: [:passwords],controllers: {
     registrations: "user/registrations",
     sessions: "user/sessions"
   }
   devise_scope :user do
     get 'users/guest_sign_in', to: "user/sessions#guest_sign_in"
+  end
+
+  namespace :admin do
+    resources :users do
+      get 'recipe', to: 'users#recipe'
+    end
   end
 
   scope module: :user do

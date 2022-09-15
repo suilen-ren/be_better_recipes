@@ -3,7 +3,10 @@
     <div class ="col-10 offset-2">
       <h4 class ="header">レシピ一覧</h4>
       <%= render 'user/share/list', recipes: @recipes%>
-      <%= paginate @recipes %>
+      <div class ="mx-auto">
+        <%= paginate @recipes %>
+      </div>
+
     </div>
   </div>
 </div>

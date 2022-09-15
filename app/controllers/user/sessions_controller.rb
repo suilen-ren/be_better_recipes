@@ -10,7 +10,7 @@ class User::SessionsController < Devise::SessionsController
         user.password = SecureRandom.urlsafe_base64
         user.name = "ゲスト"
         user.birthday = "2001-01-01"
-        user.gender = "男"
+        user.gender = "male"
       end
       sign_in user
       flash[:notice] = "ゲストユーザーとしてログインしました"

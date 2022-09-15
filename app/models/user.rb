@@ -22,4 +22,12 @@ class User < ApplicationRecord
       return 0
     end
   end
+
+  def show_gender
+    if self.gender == "male"
+      return "男性"
+    elsif self.gender == "female"
+      return "女性"
+    end
+  end
 end

@@ -26,7 +26,8 @@
                 <li class ="nav-item"><%= link_to 'tips', tips_about_diet_url ,class: "nav-link text-dark" %></li>
                 <li class ="nav-item"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete ,class: "nav-link text-dark" %></li>
               <% elsif admin_signed_in? %>
-
+                <li class ="nav-item"><%= link_to 'ユーザー一覧', admin_users_path ,class: "nav-link text-dark" %></li>
+                <li class ="nav-item"><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete ,class: "nav-link text-dark" %></li>
               <% else %>
                 <li class ="nav-item"><%= link_to "アバウト", "/about",class: "nav-link text-dark "%></li>
                 <li class ="nav-item"><%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path,class: "nav-link text-dark " %></li>
@@ -41,26 +42,32 @@
         <div class ="d-flex flex-row justify-content-end ">
             <% if user_signed_in? %>
               <p class ="text-secondary mr-3">ようこそ！<%= current_user.name %>さん</p>
+              <div class ="search-form form-inline">
+                <%= search_form_for @q, url: search_path do |f| %>
+                  <%= f.search_field :title_or_feature_or_making_cont ,class: "form-control"%>
+                  <%= f.submit "検索",class: "btn btn-secondary"%>
+                <% end %>
+              </div>
             <% elsif admin_signed_in? %>
               <p class ="text-secondary mr-30">管理人ログイン中</p>
+
+              <p>後々ここに管理人用にも検索フォーム作ります</p>
             <% end %>
-          <div class ="search-form form-inline">
-            <%= search_form_for @q, url: search_path do |f| %>
-              <%= f.search_field :title_or_feature_cont ,class: "form-control"%>
-              <%= f.submit "検索",class: "btn btn-secondary"%>
-            <% end %>
-          </div>
+
         </div>
       </div>
-
     </header>
 
+    <div class ="row">
+      <div class ="text-center">
+        <% flash.each do |message_type, message| %>
+        　<div class="alert alert-<%= message_type %>"><%= message %></div>
+        <% end %>
+      </div>
+    </div>
 
 
-    <% flash.each do |message_type, message| %>
-    　<div class="alert alert-<%= message_type %>"><%= message %></div>
-    <% end %>
-    <%= flash[:alert] %>
+
     <%= yield %>
   </body>
 </html>
