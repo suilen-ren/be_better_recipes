@@ -1,2 +1,44 @@
-<h1>Admin::Recipes#show</h1>
-<p>Find me in app/views/admin/recipes/show.html.erb</p>
+<div class ="container">
+  <div class ="row">
+    <div class = "col-10 offset-2 py-3 my-3">
+      <div class ="card shadow-sm col-12">
+        <h4 class ="card-header bg-warning">
+          <%= @recipe.title %>
+        </h4>
+        <%= image_tag @recipe.get_image, class: "card_img_top w-50 mx-auto" %>
+        <h3 class ="card-header">この料理の特徴</h3>
+        <p class ="card-body">
+          <%= @recipe.feature %>
+        </p>
+        <h3 class ="card-header">作り方</h3>
+        <p class ="card-body">
+          <%= @recipe.making %>
+        </p>
+        <h3 class ="card-header">タグ一覧</h3>
+        <p class ="card-body">
+          <% @recipe_tags.each do |tag| %>
+            <%= link_to tag.name, tag_path(tag.id) %>
+          <% end %>
+        </p>
+
+        <h4 class ="card-header my-4">公開設定</h4>
+
+
+        <%= form_with model: @recipe ,url: admin_recipe_path(@recipe.id) , class: "col-12" do |f| %>
+          <div class ="form-check m-5">
+            <%= f.radio_button :permit_admin , true, class: "form-check-input" %>
+            <%= f.label "公開を許可する",class: "form-check-label" %>
+          </div>
+          <div class ="form-check m-5">
+            <%= f.radio_button :permit_admin , false, class: "form-check-input" %>
+            <%= f.label "公開を許可しない" ,class: "form-check-label"%>
+          </div>
+          <%= f.submit "設定を変更", class: "btn btn-secondary mx-auto" %>
+        <% end %>
+
+        <%= link_to "コメントを見る",admin_recipe_comments_path(@recipe.id), class: "btn btn-secondary w-50 mx-auto my-5"%>
+      </div>
+    </div>
+  </div>
+
+</div>

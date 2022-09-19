@@ -1,4 +1,7 @@
 class User::GoalsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :reject_guest_user
+  
   def show
     @user = current_user
   end

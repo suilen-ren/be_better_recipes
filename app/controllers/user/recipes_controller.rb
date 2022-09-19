@@ -1,16 +1,20 @@
 class User::RecipesController < ApplicationController
   before_action :authenticate_user!
+  # before_action :reject_guest_user ,except: [:index,:show]
 
   def index
     @recipes = Recipe.viewable.page(params[:pages]).per(10)
   end
 
   def show
+
     @recipe = Recipe.find(params[:id])
     @recipe_tags = @recipe.tags
     @comment = Comment.new
     @comments = @recipe.comments.all
-
+    if @recipe.permit_admin == false
+      flash[:notice] = "このレシピは管理者により非表示にされています。"
+    end
   end
 
   def new

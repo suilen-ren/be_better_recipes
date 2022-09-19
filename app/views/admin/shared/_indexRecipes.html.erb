@@ -1,0 +1,19 @@
+<table class ="table col-10 offset-1">
+  <thead>
+    <tr>
+      <th>投稿日</th>
+      <th>サムネイル</th>
+      <th colspan ="2">名前</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @recipes.each do |recipe| %>
+      <tr>
+        <td><%= recipe.created_at.strftime("%Y/%m/%d") %></td>
+        <td><%= image_tag recipe.get_image ,width: "80px", height: "80px"%></td>
+        <td><%= recipe.title %></td>
+        <td><%= link_to "詳細を見る",admin_recipe_path(recipe.id), class: "btn btn-secondary" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -15,9 +15,10 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_user_path(@user.id), notice: "ステータスを変更しました"
   end
 
-  def destroy
-  end
+
   def recipe
+    @user = User.find(params[:user_id])
+    @recipes = @user.recipes.all.page(params[:pages]).per(15)
   end
 
   private

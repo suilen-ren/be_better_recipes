@@ -1,4 +1,7 @@
 class User::BodyweightsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :reject_guest_user
+  
   def update
     bodyweight = Bodyweight.find(params[:id])
     if bodyweight.update(bodyweight_params)

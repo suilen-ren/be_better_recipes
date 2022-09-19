@@ -1,9 +1,11 @@
 class User::MypagesController < ApplicationController
   before_action :authenticate_user!
+  before_action :reject_guest_user
+
   def show
     favorites = Favorite.where(user_id: current_user.id).pluck(:recipe_id)
     @fav_recipes = Recipe.viewable.where(id: favorites).limit(4)
-    @my_recipes = Recipe.viewable.where(user_id: current_user.id).limit(4)
+    @my_recipes = Recipe.where(user_id: current_user.id).limit(4)
     @bodyweights = current_user.bodyweights.all
     @bodyweight = Bodyweight.all
   end
@@ -44,6 +46,12 @@ class User::MypagesController < ApplicationController
   end
 
   def withdraw
+    @user = current_user
+    @user.update(is_active: false)
+    binding.pry
+    reset_session
+    redirect_to root_path
+
   end
 
   def favorite

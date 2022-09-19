@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :users do
+    resources :users ,onlu: [:index,:show,:update] do
       get 'recipe', to: 'users#recipe'
     end
   end

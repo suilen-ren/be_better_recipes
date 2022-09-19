@@ -1,2 +1,13 @@
-<h1>Admin::Users#recipes</h1>
-<p>Find me in app/views/admin/users/recipes.html.erb</p>
+<div class ="container p-5">
+  <div class ="row">
+    <div class ="card col-12">
+      <h4 class ="card-header"><%= @user.name %>さんの投稿したレシピ</h4>
+      <%= render "admin/shared/indexRecipes" %>
+      <div class ="mx-auto">
+        <%= paginate @recipes %>
+      </div>
+
+    </div>
+  </div>
+
+</div>

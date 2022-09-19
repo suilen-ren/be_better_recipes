@@ -1,2 +1,19 @@
-<h1>User::Mypages#confirm</h1>
-<p>Find me in app/views/user/mypages/confirm.html.erb</p>
+<div class ="container p-5">
+  <div class ="row">
+    <div class ="col-12">
+      <h3 class ="mx-auto">
+        本当に退会しますか？
+      </h3>
+      <p class ="mx-auto">
+        今までのご利用ありがとうございました。<br>
+        今後同じメールアドレスでの新規登録はできません。<br>
+        改めてご利用いただく際は今一度ご連絡いただくか、別のメールアドレスでのご利用をお願いいいたします。
+      </p>
+
+      <div class = "d-flex flex-row ">
+        <%= link_to "退会しない", mypages_path, class: "btn btn-secondary ml-auto mr-5"%>
+        <%= link_to "退会する", withdraw_mypages_path, method: :patch ,class: "btn btn-danger mr-auto"%>
+      </div>
+    </div>
+  </div>
+</div>

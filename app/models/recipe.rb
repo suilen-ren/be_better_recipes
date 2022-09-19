@@ -5,7 +5,7 @@ class Recipe < ApplicationRecord
   has_many :tag_maps, dependent: :destroy
   has_many :tags, through: :tag_maps
   has_one_attached :image
-  
+
   validates :user_id, presence: true
   validates :title,presence: true,length: {maximum: 20}
   validates :feature ,presence: true,length: {maximum: 300}
@@ -42,6 +42,14 @@ class Recipe < ApplicationRecord
   def self.viewable
     p_user = Recipe.where(permit_user: true)
     return p_user.where(permit_admin: true)
+  end
+
+  def viewable?
+    if self.permit_admin == true && self.permit_user == true
+      return true
+    else
+      return false
+    end
   end
 
   def favorited_by?(user)

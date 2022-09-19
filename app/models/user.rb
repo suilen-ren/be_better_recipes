@@ -12,7 +12,7 @@ class User < ApplicationRecord
   validates :name , presence: true , length: {minimum: 2,maximum:10}
   validates :birthday ,presence: true
   validates :gender ,inclusion: ["male","female"]
-  validates :is_active ,presence: true
+  validates :is_active ,inclusion: [true,false]
 
   def balance
     minus = self.bodyweights.last.weight - self.target_weight
