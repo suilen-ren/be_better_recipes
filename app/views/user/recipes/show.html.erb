@@ -33,15 +33,27 @@
           <% if @recipe.user_id == current_user.id && !current_user.guest_user? %>
             <%= link_to "編集する", edit_recipe_path(@recipe), class: "btn btn-primary mr-5 ml-auto" %>
           <% end %>
-          <h4 class ="card-header">コメントを投稿する</h4>
-          <div class ="card-body">
+          <h4 class ="card-header mt-3">コメントを投稿する</h4>
+          <% if current_user.guest_user? %>
+            <div class ="card-body">
+              <%= form_with model: [@recipe, @comment], url: recipe_comments_path(@recipe.id) do |f| %>
+                <div class ="form-group" >
+                  <%= f.text_area :comment_text, rows: 5, placeholder: "コメント機能を利用するには会員登録してください",disabled: true, class: "form-control" %>
+                  <%= f.submit "投稿する" ,class: "btn btn-secondary", disabled: true  %>
+                </div>
+              <% end %>
+            </div>
+          <% else %>
+            <div class ="card-body">
             <%= form_with model: [@recipe, @comment], url: recipe_comments_path(@recipe.id) do |f| %>
               <div class ="form-group" >
                 <%= f.text_area :comment_text, rows: 5, placeholder: "コメントを入力", class: "form-control" %>
-                <%= f.submit "投稿する" %>
+                <%= f.submit "投稿する" ,class: "btn btn-secondary"%>
               </div>
             <% end %>
           </div>
+          <% end %>
+
 
         </div>
       </div>
@@ -58,7 +70,7 @@
                 <div class ="text-right" >
                   <p><%= comment.created_at.strftime('%Y %m/%d %H:%M') %></p>
                   <% if comment.user == current_user %>
-                    <%= link_to "削除","/recipes/#{@recipe.id}/comments/#{comment.id}", method: :delete ,class: "btn btn-danger" %>
+                    <%= link_to "削除","/recipes/#{@recipe.id}/comments/#{comment.id}", method: :delete ,class: "btn btn-danger",data: { confirm: "コメントを削除します。"} %>
                   <% end %>
                 </div>
               </div>

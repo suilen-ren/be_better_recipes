@@ -36,7 +36,7 @@ class User::RecipesController < ApplicationController
       flash[:notice] = "変更を保存しました"
       redirect_to recipe_path(@recipe.id)
     else
-      render :edit
+      redirect_back(fallback_location: root_path)
     end
 
   end
@@ -45,7 +45,7 @@ class User::RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     verify_correct_user(@recipe)
     @recipe.destroy
-    redirect_to recipes_path
+    redirect_to recipes_path, notice: "レシピを削除しました"
   end
 
   def create

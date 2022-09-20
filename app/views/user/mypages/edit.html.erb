@@ -47,22 +47,24 @@
       <h4 class ="card-header my-3">記録した体重を訂正する</h4>
       <div class ="col-10 offset-1">
 
-        <p class ="card-body">過去4日ぶんの体重を訂正できます。</p>
-        <% @bodyweights.each do |bodyweight| %>
-          <div class ="card col-3">
-            <p class ="card-header"><%= bodyweight.created_at.strftime("%m/%d") %></p>
-            <%= form_with model: bodyweight,url: mypages_bodyweight_path(bodyweight.id),local: true do |f| %>
-              <div class ="card-body">
-                <div class ="form-inline text-center">
-                  <%= f.text_field :weight ,class: "form-control w-75" %><%= f.label "kg" %>
+        <p class ="card-body">過去4日間の体重を訂正できます。</p>
+          <div class ="d-flex flex-row">
+          <% @bodyweights.each do |bodyweight| %>
+            <div class ="col-3 card">
+              <p class ="card-header"><%= bodyweight.created_at.strftime("%m/%d") %></p>
+              <%= form_with model: bodyweight,url: mypages_bodyweight_path(bodyweight.id),local: true do |f| %>
+                <div class ="card-body">
+                  <div class ="form-inline text-center">
+                    <%= f.text_field :weight ,class: "form-control w-75" %><%= f.label "kg" %>
+                  </div>
+                  <div class ="text-center">
+                    <%= f.submit "変更" ,class: "btn btn-success m-2"%>
+                  </div>
                 </div>
-                <div class ="text-center">
-                  <%= f.submit "変更" ,class: "btn btn-success m-2"%>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

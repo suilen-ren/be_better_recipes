@@ -11,14 +11,9 @@ Rails.application.routes.draw do
     get 'users/guest_sign_in', to: "user/sessions#guest_sign_in"
   end
 
-  namespace :admin do
-    resources :users ,onlu: [:index,:show,:update] do
-      get 'recipe', to: 'users#recipe'
-    end
-  end
 
   scope module: :user do
-    get 'search', to: "recipes#search"
+
     root to: 'homes#top'
 
     resources :tags ,only: [:show]
@@ -28,6 +23,7 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create,:destroy]
       resources :comments, only: [:create,:destroy]
     end
+    get 'search', to: "recipes#search"
     resource :mypages ,except: [:new, :destroy] do
       get 'recipes', to: 'mypages#recipes'
       get 'confirm', to: 'mypages#confirm'
@@ -40,9 +36,14 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :recipes , except: [:edit, :new, :create] do
+    root to: "recipes#index"
+    resources :users ,onlu: [:index,:show,:update] do
+      get 'recipe', to: 'users#recipe'
+    end
+    resources :recipes , except: [:index,:edit, :new, :create] do
       resources :comments ,only: [:index, :destroy]
     end
+    get "/recipe/search", to: "recipes#search"
     resources :users ,except: [:new,:create,:destroy] do
       get 'recipes' ,to: 'users#recipes'
     end

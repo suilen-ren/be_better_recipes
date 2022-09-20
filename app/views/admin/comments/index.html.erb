@@ -1,2 +1,29 @@
-<h1>Admin::Comments#index</h1>
-<p>Find me in app/views/admin/comments/index.html.erb</p>
+<div class ="container p-5">
+  <div class ="row">
+    <div class ="col-10 offset-1">
+      <h4 class ="header">コメント一覧</h4>
+
+      <% if @comments.any? %>
+        <% @comments.each do |comment| %>
+          <div class ="card col-10 shadow-sm my-2">
+            <div class ="card-body">
+              <p><%= comment.user.name %>さん</p> <br>
+              <p><%= comment.comment_text %></p>
+              <div class ="d-flex flex-row justify-content-end" >
+                <p><%= comment.created_at.strftime('%Y %m/%d %H:%M') %></p>
+                <%= link_to "削除",admin_recipe_comment_path(@recipe.id,comment.id), method: :delete ,class: "btn btn-danger ml-1",data: { confirm: "コメントを削除します。"} %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <div class ="d-flex justify-content-center">
+        <%= paginate @comments %>
+      </div>
+
+
+      <% else %>
+        <p>コメントはありません</p>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -11,7 +11,7 @@
   </head>
 
   <body class ="d-flex flex-column vh-150">
-    <header class="shadow-sm">
+    <header class="shadow-sm mb-5">
       <nav class ="navbar navbar-expand-lg navbar-light">
         <div class ="container">
           <a class ="navbar-brand p-3" href="/">be better recipes</a>
@@ -27,7 +27,7 @@
                 <li class ="nav-item"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete ,class: "nav-link text-dark" %></li>
               <% elsif admin_signed_in? %>
                 <li class ="nav-item"><%= link_to 'ユーザー一覧', admin_users_path ,class: "nav-link text-dark" %></li>
-                <li class ="nav-item"><%= link_to 'レシピ一覧', admin_recipes_path ,class: "nav-link text-dark" %></li>
+                <li class ="nav-item"><%= link_to 'レシピ一覧', admin_root_path ,class: "nav-link text-dark" %></li>
                 <li class ="nav-item"><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete ,class: "nav-link text-dark" %></li>
               <% else %>
                 <li class ="nav-item"><%= link_to "アバウト", "/about",class: "nav-link text-dark "%></li>
@@ -50,20 +50,25 @@
                 <% end %>
               </div>
             <% elsif admin_signed_in? %>
-              <p class ="text-secondary mr-30">管理人ログイン中</p>
-
-              <p>後々ここに管理人用にも検索フォーム作ります</p>
+              <p class ="text-secondary mr-3">管理人ログイン中</p>
+              <div class ="search-form form-inline">
+                <%= search_form_for @q, url: admin_recipe_search_path do |f| %>
+                  <%= f.search_field :title_or_feature_or_making_cont ,class: "form-control"%>
+                  <%= f.submit "検索",class: "btn btn-secondary"%>
+                <% end %>
+              </div>
             <% end %>
-
         </div>
       </div>
     </header>
 
     <div class ="row">
-      <div class ="text-center">
-        <% flash.each do |message_type, message| %>
-        　<div class="alert alert-<%= message_type %>"><%= message %></div>
-        <% end %>
+      <div class ="col-12">
+        <div class ="text-center">
+          <% flash.each do |message_type, message| %>
+          　<div class="alert alert-<%= message_type %>"><%= message %></div>
+          <% end %>
+        </div>
       </div>
     </div>
 
@@ -71,4 +76,16 @@
 
     <%= yield %>
   </body>
+  <footer class ="bg-dark text-white pt-5 pb-4 mt-5">
+    <div class = "container">
+      <div class = "row no-gutters">
+        <div class = "col-12">
+          <div class ="text-center">
+            <p>Be Better Recipes ～健康かつ開放された食生活を～</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
 </html>
