@@ -7,6 +7,7 @@ class Recipe < ApplicationRecord
   has_one_attached :image
 
   validates :user_id, presence: true
+  validates :image, presence: true
   validates :title,presence: true,length: {maximum: 20}
   validates :feature ,presence: true,length: {maximum: 300}
   validates :making ,presence: true,length: {maximum: 1000}

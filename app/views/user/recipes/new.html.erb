@@ -1,27 +1,45 @@
-<h2>レシピ新規投稿</h2>
+<div class ="container p-5">
+  <%= form_with model: @recipe , url: "/recipes/#{@recipe.id}",method: :post ,local: true  do |f| %>
+    <div class ="row">
 
-<%= form_with model: @recipe , url: "/recipes" ,local: true  do |f| %>
+      <div class ="card col-12">
+        <h2 class ="card-header mb-5">レシピ編集</h2>
+        <div class ="form-group row">
+          <label class ="col-2">レシピ名</label>
+          <%= f.text_field :title ,class: "form-control col-10"%><br />
+        </div>
 
-  <label>レシピ名</label><br />
-  <%= f.text_field :title %><br />
+        <div class ="form-group row">
+          <label class ="col-2">料理完成イメージ</label>
+          <%= f.file_field :image, accept: "image/*", class: "form-control-file col-10"%><br />
+        </div>
 
-  <label>料理完成イメージ</label><br />
-  <%= f.file_field :image, accept: "image/*"%>
+        <div class ="form-group">
+          <label>タグ(複数タグを作る場合は","で区切ってください。)</label><br />
+          <%= f.text_field :tag_name,value: @tag_list,class: "form-control col-10 offset-2"%><br />
+        </div>
 
-  <label>タグ(複数タグを作る場合は)</label><br />
-  <%= f.text_field :tag_name %><br />
+        <div class ="form-group row">
+          <label class ="col-2">レシピの特長</label>
+          <%= f.text_area :feature ,rows: 10,class: "form-control col-10 "%><br />
+        </div>
 
-  <label>レシピの特長</label><br />
-  <%= f.text_area :feature %><br />
+        <div class ="form-group row">
+          <label class ="col-2">作り方</label>
+          <%= f.text_area :making ,rows: 10,class: "form-control col-10 "%><br />
+        </div>
 
-  <label>作り方</label><br />
-  <%= f.text_area :making %><br />
+        <div class ="form-group row">
+          <label class ="col-2">公開設定</label>
+          <div class ="col-9">
+            <%= f.radio_button :permit_user, true ,class: "form-check-input" %> <span class ="form-check-label">公開する</span></br>
+            <%= f.radio_button :permit_user, false ,class: "form-check-input" %> <span class ="form-check-label">公開しない(下書き)</span><br />
+          </div>
+        </div>
+        <%= f.submit "レシピを保存する" ,class: "btn btn-success mx-auto my-5"%>
 
-  <label>公開設定</label><br />
-  <%= f.radio_button :permit_user, true %><span>公開する</span>
-  <%= f.radio_button :permit_user, false %><span>公開しない(下書き)</span><br />
-
-  <%= f.submit "レシピを保存する" %>
-  
-
-<% end %>
+      </div>
+    </div>
+  <% end %>
+  <%= link_to "レシピを削除する", "/recipes/#{@recipe.id}" ,method: :delete ,data: { confirm: "本当に削除しますか？一度消したレシピは復元できません"}%>
+</div>

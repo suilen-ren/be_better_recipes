@@ -21,12 +21,16 @@
               <%= link_to tag.name, tag_path(tag.id) %>
             <% end %>
           </p>
-          <% if @recipe.favorited_by?(current_user) %>
-            <%= link_to 'お気に入り登録済' ,recipe_favorites_path(@recipe.id), method: :delete, class: "btn btn-secondary" %>
+          <% if current_user.guest_user? %>
+            <button class ="btn btn-secondary" disabled>ログインするとお気に入り機能をご利用いただけます</button>
           <% else %>
-            <%= link_to 'お気に入り登録する', recipe_favorites_path(@recipe.id), method: :post ,class: "btn btn-primary" %>
+            <% if @recipe.favorited_by?(current_user) %>
+              <%= link_to 'お気に入り登録済' ,recipe_favorites_path(@recipe.id), method: :delete, class: "btn btn-secondary" %>
+            <% else %>
+              <%= link_to 'お気に入り登録する', recipe_favorites_path(@recipe.id), method: :post ,class: "btn btn-primary" %>
+            <% end %>
           <% end %>
-          <% if @recipe.user_id == current_user.id %>
+          <% if @recipe.user_id == current_user.id && !current_user.guest_user? %>
             <%= link_to "編集する", edit_recipe_path(@recipe), class: "btn btn-primary mr-5 ml-auto" %>
           <% end %>
           <h4 class ="card-header">コメントを投稿する</h4>

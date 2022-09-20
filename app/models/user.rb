@@ -30,4 +30,12 @@ class User < ApplicationRecord
       return "女性"
     end
   end
+
+  def guest_user?
+    if self.email == "guest@example.com"
+      return true
+    else
+      return false
+    end
+  end
 end

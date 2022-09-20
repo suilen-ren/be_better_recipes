@@ -23,11 +23,13 @@ class User::RecipesController < ApplicationController
 
   def edit
     @recipe = Recipe.find(params[:id])
+    verify_correct_user(@recipe)
     @tag_list = @recipe.tags.pluck(:name).join(',')
   end
 
   def update
     @recipe = Recipe.find(params[:id])
+    verify_correct_user(@recipe)
     tag_list = params[:recipe][:tag_name].split(",")
     if @recipe.update(recipe_params)
       @recipe.save_recipes(tag_list)
@@ -41,6 +43,7 @@ class User::RecipesController < ApplicationController
 
   def destroy
     @recipe = Recipe.find(params[:id])
+    verify_correct_user(@recipe)
     @recipe.destroy
     redirect_to recipes_path
   end
@@ -54,7 +57,8 @@ class User::RecipesController < ApplicationController
       tag_list = params[:recipe][:tag_name].split(",")
       @recipe.save_recipes(tag_list)
     else
-      render :new
+      flash[:notice] = "すべての項目を入力してから保存してください。"
+      redirect_back(fallback_location: root_path)
     end
   end
   def search

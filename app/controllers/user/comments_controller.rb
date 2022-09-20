@@ -15,7 +15,9 @@ class User::CommentsController < ApplicationController
 
   end
   def destroy
-    Comment.find(params[:id]).destroy
+    comment = Comment.find(params[:id])
+    verify_correct_user(comment)
+    comment.destroy
     redirect_to recipe_path(params[:recipe_id])
 
 
