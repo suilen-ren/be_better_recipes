@@ -1,2 +1,21 @@
-<h1>User::Homes#top</h1>
-<p>Find me in app/views/user/homes/top.html.erb</p>
+<div class ="container p-5">
+  <div class ="row">
+    <div class ="col-10 offset-1">
+      <div class ="d-flex justify-content-center">
+        <img src = "/assets/24504969_m.jpg" class ="w-75 mx-auto">
+
+      </div>
+
+      <div class ="text-center">
+        <h3 class ="header py-3">美味しい食事でダイエットをしませんか？</h3>
+        <h5 class ="py-3">「ダイエットは我慢してするもの」という考えはもうおしまいです。<br>
+        栄養バランスを考えた美味しく続けられる料理でダイエットを成功させましょう！</h5>
+
+      </div>
+      <div class ="row">
+        <h4 class ="header ml-4"><mark>人気レシピ</mark></h4>
+        <%= render "user/share/list" ,recipes: @recipes%>
+      </div>
+    </div>
+  </div>
+</div>

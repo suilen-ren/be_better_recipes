@@ -1,2 +1,27 @@
-<h1>User::Homes#about</h1>
-<p>Find me in app/views/user/homes/about.html.erb</p>
+<div class ="container p-5">
+  <div class ="row">
+    <div class ="col-10 offset-1 col-sm-12 offset-sm-0">
+      <div class ="text-center">
+        <h4 class ="header">ダイエットで一番大事なものは食事です。</h4>
+      </div>
+      <p>
+        結論から言うと、ダイエットに必要なことは摂取したカロリーと消費するカロリーを比較し、摂取したカロリーを少なくすることです。<br>
+        極端な話、一日何も食べずに運動だけすれば痩せます。ですが、それはあまりにも健康的ではありません。<br>
+        Be Better Recipesでは、「健康的でストレスなく、続けられるダイエット」を皆様に提案します。
+        食事の質と量に気を配れば、満足感のある食事でダイエットを行うことは可能です。<br>
+
+      </p>
+      <div class ="text-center">
+        <h5 class ="header pt-5">まずはレシピを見てみませんか？</h5>
+        <p>
+          下のボタンより、レシピを閲覧することが可能です。会員登録等は必要ありません。<br>
+          ぜひ、御覧ください。
+        </p>
+      </div>
+
+      <div class ="text-center">
+        <%= link_to "ゲスト入場", users_guest_sign_in_path ,class: "btn btn-secondary"%>
+      </div>
+    </div>
+  </div>
+</div>
