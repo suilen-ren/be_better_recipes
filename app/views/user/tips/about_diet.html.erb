@@ -69,12 +69,66 @@
       <p>
         <br>
         　ここまで触れてこなかった野菜に関してですが、野菜はある程度積極的に食べたほうが良いでしょう。
-        ある程度カロリーが存在するものも多いですが、人間に必要な微量栄養素が多く含まれているものも多いです。葉っぱものの野菜やきのこ類、根菜には食物繊維が多く含まれており、胃腸の環境を整えるのに役立ちます。<br>
+        ある程度カロリーが存在するものも多いですが、ビタミンなどの人間に必要な微量栄養素が多く含まれているものも多いです。葉っぱものの野菜やきのこ類、根菜には食物繊維が多く含まれており、胃腸の環境を整えるのに役立ちます。<br>
         　ただ、食べる際に気をつけていただきたいのはドレッシングです。大抵のドレッシングには大量の油が使われており、使用する量によっては脂質過多になる可能性があります。
         <mark>ドレッシングに限らず、調味料にもカロリーは存在するので、栄養成分を気にしておくと良いでしょう。</mark>
       </p>
       <h4 class ="header border-bottom">消費カロリー、栄養バランス計算機</h4>
-      <p>ここまでの説明をもとに、メンテナンスカロリー計算</p>
+      <p>
+        ここまでの説明をもとに、メンテナンスカロリー計算を計算していきます。食生活を改善するに当たっての目安にしていただければと思います。ぜひご活用ください。<br>
+        増量、減量によってカロリーを調整するときは<mark>糖質の量を増やしたり減らしたりするのがオススメです</mark>。
+      </p>
+      <%= form_with model: nil ,url: tips_about_diet_path, method: :post, local: false do |f| %>
+        <div class ="d-flex flex-column">
+          <div class ="row my-3 justify-content-center">
+            <div class ="form-inline">
+              <%= f.text_field :age ,id: "age",placeholder: "年齢",class: "form-control"%>
+              <label class="mr-2">歳</label>
+            </div>
+            <div class ="form-inline">
+              <%= f.text_field :weight ,id: "weight" ,placeholder: "体重",class: "form-control"%>
+              <label class　="mr-2">kg</label>
+            </div>
+            <div class ="form-inline">
+              <%= f.text_field :height ,id: "height" ,placeholder: "身長",class: "form-control" %>
+              <label>cm</label>
+            </div>
+          </div>
+          <div class ="row my-3 justify-content-center">
+            <div class ="form-inline">
+              <label>性別</label>
+              <%= f.select :gender_num ,[["男性", 1 ],["女性", 2]], {}  ,{class: "custom-select ml-1 mr-2",id: "gender_num"} %>
+            </div>
+            <div class ="form-inline">
+              <label>日々の活動量</label>
+              <%= f.select :activity, [["デスクワーク等ほぼ運動なし",1],["軽い運動、月に1,2回の運動",2],["中程度、週に3,4回の運動",3],
+              ["激しい運動、ほぼ毎日運動",4],["非常に運動量が多い,毎日2度の運動",5]], {},{class: "custom-select ml-1",id: "activity"} %>
+            </div>
+          </div>
+          <%= f.submit "この条件で計算する" , id: 'result' ,class: "btn btn-secondary"%>
+        </div>
+      <% end %>
+      <div class ="d-flex flex-row">
+        <table class ="table disp_switch">
+          <tr>
+            <th colspan ="2">計算結果</th>
+            <th colspan ="3">摂取目安量</th>
+          </tr>
+          <tr>
+            <td>基礎代謝</td>
+            <td>総消費カロリー目安</td>
+            <td>タンパク質</td>
+            <td>脂質</td>
+            <td>炭水化物</td>
+          </tr>
+          <tr>
+            <td id ="base_calorie"></td>
+            <td id ="total_calorie"></td>
+            <td id ="protein"></td>
+            <td id ="fat"></td>
+            <td id ="carbo"></td>
+          </tr>
+        </table>
     </div>
   </div>
 </div>

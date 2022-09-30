@@ -31,7 +31,7 @@
         <% end %>
       </div>
 
-      <%= line_chart @bodyweights.group_by_day(:created_at).sum(:weight), curve: false, empty: "体重を記録していません。日々の変化の記録をつけていきましょう。" %>
+      <%= line_chart @bodyweights.pluck(:created_at,:weight) ,curve: false, empty: "体重を記録していません。日々の変化の記録をつけていきましょう。" %>
       <div class = "text-center" >
         <% if current_user.target_weight.present? && current_user.bodyweights.exists? %>
 

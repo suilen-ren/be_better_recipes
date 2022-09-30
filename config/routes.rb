@@ -33,6 +33,7 @@ Rails.application.routes.draw do
       resources :bodyweights ,only: [:update]
     end
     get 'tips/about_diet', to: 'tips#about_diet'
+    post 'tips/about_diet', to: 'tips#about_diet'
   end
 
   namespace :admin do
