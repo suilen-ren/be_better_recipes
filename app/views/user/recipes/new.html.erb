@@ -3,9 +3,9 @@
     <div class ="row">
 
       <div class ="card col-12">
-        <h2 class ="card-header mb-5">レシピ編集</h2>
+        <h2 class ="card-header mb-5">レシピ新規投稿</h2>
         <div class ="form-group row">
-          <label class ="col-2">レシピ名</label>
+          <label class ="col-2">レシピ名(10文字以内)</label>
           <%= f.text_field :title ,class: "form-control col-10"%><br />
         </div>
 
@@ -20,12 +20,12 @@
         </div>
 
         <div class ="form-group row">
-          <label class ="col-2">レシピの特長</label>
+          <label class ="col-2">レシピの特長(300文字以内)</label>
           <%= f.text_area :feature ,rows: 10,class: "form-control col-10 "%><br />
         </div>
 
         <div class ="form-group row">
-          <label class ="col-2">作り方</label>
+          <label class ="col-2">作り方(1000文字以内)</label>
           <%= f.text_area :making ,rows: 10,class: "form-control col-10 "%><br />
         </div>
 

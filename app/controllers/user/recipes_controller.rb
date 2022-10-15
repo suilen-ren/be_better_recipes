@@ -19,6 +19,7 @@ class User::RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
+    reject_guest_user
   end
 
   def edit
@@ -53,11 +54,11 @@ class User::RecipesController < ApplicationController
     @recipe.user_id = current_user.id
 
     if @recipe.save
-      redirect_to recipes_path
+      redirect_to recipe_path(@recipe.id) ,notice: "新規レシピを保存しました。"
       tag_list = params[:recipe][:tag_name].split(",")
       @recipe.save_recipes(tag_list)
     else
-      flash[:notice] = "すべての項目を入力してから保存してください。"
+      flash[:notice] = "すべての項目を入力してから保存してください。または文字数制限を超えていないか確認してください"
       redirect_back(fallback_location: root_path)
     end
   end

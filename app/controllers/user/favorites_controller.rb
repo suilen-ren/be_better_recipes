@@ -6,14 +6,14 @@ class User::FavoritesController < ApplicationController
     recipe = Recipe.find(params[:recipe_id])
     favorite = current_user.favorites.new(recipe_id: recipe.id)
     favorite.save
-    redirect_to recipe_path(recipe)
+    redirect_to recipe_path(recipe),notice: "レシピをお気に入りに追加しました"
   end
 
   def destroy
     recipe = Recipe.find(params[:recipe_id])
     favorite = current_user.favorites.find_by(recipe_id: recipe.id)
     favorite.destroy
-    redirect_to recipe_path(recipe)
+    redirect_to recipe_path(recipe),notice: "レシピをお気に入りから削除しました"
   end
 
 

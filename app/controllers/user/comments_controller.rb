@@ -7,7 +7,7 @@ class User::CommentsController < ApplicationController
     comment = current_user.comments.new(comment_params)
     comment.recipe_id = recipe.id
     if comment.save
-      redirect_to recipe_path(recipe.id)
+      redirect_to recipe_path(recipe.id), notice: "コメントを投稿しました"
     else
       flash[:alert] = "コメントが入力されていません"
       redirect_back(fallback_location: root_path )
@@ -18,7 +18,7 @@ class User::CommentsController < ApplicationController
     comment = Comment.find(params[:id])
     verify_correct_user(comment)
     comment.destroy
-    redirect_to recipe_path(params[:recipe_id])
+    redirect_to recipe_path(params[:recipe_id]),notice: "コメントを削除しました"
 
 
   end

@@ -14,12 +14,16 @@ class User::MypagesController < ApplicationController
     @bodyweight = Bodyweight.new(bodyweight_params)
     @bodyweight.user_id = current_user.id
     if current_user.bodyweights.exists?(created_at: Time.zone.now.all_day)
-      flash[:alert] = "今日の体重はすでに登録されています"
+      flash[:alert] = "今日の体重はすでに登録されています。訂正は会員情報編集から行えます。"
       redirect_to mypages_path
     else
-      @bodyweight.save
-      flash[:notice] = "今日の体重を保存しました"
-      redirect_to mypages_path
+      if @bodyweight.save
+        flash[:notice] = "今日の体重を保存しました"
+        redirect_to mypages_path
+      else
+        flash[:notice] = "有効な数字を入力してください"
+        redirect_back(fallback_location: root_path)
+      end
     end
   end
 
@@ -50,7 +54,7 @@ class User::MypagesController < ApplicationController
     @user.update(is_active: false)
     binding.pry
     reset_session
-    redirect_to root_path
+    redirect_to root_path, notice: "退会処理が完了しました。"
 
   end
 
