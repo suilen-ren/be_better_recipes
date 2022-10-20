@@ -9,7 +9,8 @@ class User::GoalsController < ApplicationController
 
   def update
     @user = current_user
-    if params[:user][:target_date].nil? || params[:user][:target_weight].blank?
+    if params[:user][:target_date].blank? || params[:user][:target_weight].blank?
+
       flash[:notice] = "目標の日付と体重両方を登録する必要があります"
       redirect_back(fallback_location: root_path)
     elsif params[:user][:target_date].to_date.before? Date.today

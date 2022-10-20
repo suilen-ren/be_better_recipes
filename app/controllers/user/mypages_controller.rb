@@ -52,7 +52,6 @@ class User::MypagesController < ApplicationController
   def withdraw
     @user = current_user
     @user.update(is_active: false)
-    binding.pry
     reset_session
     redirect_to root_path, notice: "退会処理が完了しました。"
 
