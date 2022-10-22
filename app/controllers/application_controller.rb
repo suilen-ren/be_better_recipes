@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :set_q
 
+  private
   def reject_guest_user
     if current_user.guest_user?
       flash[:notice] = "ゲスト機能ではご利用いただけません ログインまたは会員登録をお願いいたします"
@@ -16,7 +17,7 @@ class ApplicationController < ActionController::Base
       admin_root_path
     end
   end
-  
+
   def after_sign_out_path_for(resource)
     root_path
   end
@@ -29,7 +30,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  private
+
   def set_q
     @q = Recipe.ransack(params[:q])
   end

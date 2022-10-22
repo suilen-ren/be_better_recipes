@@ -54,6 +54,4 @@ $("#result").on('click',function(event){
     $("#fat").html(parseInt(fat) + "g");
     $("#carbo").html(parseInt(carbo) + "g");
   }
-
-
 })
