@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   def reject_guest_user
     if current_user.guest_user?
       flash[:notice] = "ゲスト機能ではご利用いただけません ログインまたは会員登録をお願いいたします"
-      redirect_back(fallback_location: root_path)
+      return redirect_back(fallback_location: root_path)
     end
   end
 
