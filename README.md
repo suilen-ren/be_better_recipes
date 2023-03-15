@@ -19,7 +19,13 @@
 体の変化の目標の設定、進捗の表示
 
 ## 設計書
-<...>
+- 実装機能リスト:https://docs.google.com/spreadsheets/d/1r9yllsO_TIeSpukJvkiy_IBbzl1AtTfb1Mag63ypcis/edit?usp=sharing
+- WBS: https://docs.google.com/spreadsheets/d/160IRAz8-O-A6wwyuFRBA7NfncYz2SkXnaj-LXUCa4vY/edit?usp=sharing
+- ER図: https://drive.google.com/file/d/1C5BGRAVkM86fNoRZk-o3t6prtBaUmoz_/view?usp=sharing
+- 詳細設計: https://docs.google.com/spreadsheets/d/1xSn2yFjFHEbA94vSaNDqNmpRLyhDfSvo_kP4pxRsPpg/edit?usp=share_link
+- 管理者　ワイヤーフレーム: https://drive.google.com/drive/folders/1HGU_TgdkFTejIzZdi97S0KlJSESxgZJf?usp=sharing
+- ユーザー　ワイヤーフレーム: https://drive.google.com/drive/folders/144okCp0emVbhJv-nfHygKae_8u0nXbeq?usp=sharing
+- 画面遷移図: https://drive.google.com/file/d/1T5KMOWwT7u3hRP9w5Fpqu71UpROs2byC/view?usp=sharing
 
 ## 開発環境
 - OS：Linux(CentOS)
