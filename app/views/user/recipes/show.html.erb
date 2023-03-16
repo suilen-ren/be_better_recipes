@@ -21,15 +21,7 @@
               <%= link_to tag.name, tag_path(tag.id) %>
             <% end %>
           </p>
-          <% if current_user.guest_user? %>
-            <button class ="btn btn-secondary" disabled >ログインするとお気に入り機能をご利用いただけます</button>
-          <% else %>
-            <% if @recipe.favorited_by?(current_user) %>
-              <%= link_to 'お気に入り登録済' ,recipe_favorites_path(@recipe.id), method: :delete, class: "btn btn-secondary ",id: 'favorite-button',remote: true %>
-            <% else %>
-              <%= link_to 'お気に入り登録する', recipe_favorites_path(@recipe.id), method: :post ,class: "btn btn-primary",id: 'favorite-button',remote: true %>
-            <% end %>
-          <% end %>
+          <%= render '/user/favorites/favorite' %>
           <% if @recipe.user_id == current_user.id && !current_user.guest_user? %>
             <%= link_to "編集する", edit_recipe_path(@recipe), class: "btn btn-primary mr-5 ml-auto" %>
           <% end %>
