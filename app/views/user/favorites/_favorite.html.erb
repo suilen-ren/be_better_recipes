@@ -2,8 +2,8 @@
   <button class ="btn btn-secondary" disabled >ログインするとお気に入り機能をご利用いただけます</button>
 <% else %>
   <% if @recipe.favorited_by?(current_user) %>
-    <%= link_to 'お気に入り登録済' ,recipe_favorites_path(@recipe.id), method: :delete, class: "btn btn-secondary ",id: 'favorite-button',remote: true %>
+    <%= link_to 'お気に入り登録済' ,recipe_favorites_path(@recipe.id), method: :delete, class: "btn btn-secondary ",remote: true %>
   <% else %>
-    <%= link_to 'お気に入り登録する', recipe_favorites_path(@recipe.id), method: :post ,class: "btn btn-primary",id: 'favorite-button',remote: true %>
+    <%= link_to 'お気に入り登録する', recipe_favorites_path(@recipe.id), method: :post ,class: "btn btn-primary",remote: true %>
   <% end %>
 <% end %>

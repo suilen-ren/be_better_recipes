@@ -21,7 +21,9 @@
               <%= link_to tag.name, tag_path(tag.id) %>
             <% end %>
           </p>
-          <%= render '/user/favorites/favorite' %>
+          <div class='row mx-auto' id='favorite_btn_<%= @recipe.id%>'>
+            <%= render '/user/favorites/favorite' %>
+          </div>
           <% if @recipe.user_id == current_user.id && !current_user.guest_user? %>
             <%= link_to "編集する", edit_recipe_path(@recipe), class: "btn btn-primary mr-5 ml-auto" %>
           <% end %>
